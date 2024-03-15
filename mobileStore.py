@@ -25,16 +25,32 @@ class MobileStoreManagement:
         print("**********WELCOME TO ADMIN PANEL**********")
 
         while True:
-
-            print("a. Logout")
+            print("\nAdmin Panel:")
+            print("a. View Product")
+            print("e. Logout")
             print()
 
             choice = input("Enter your choice: ")
+            print()
+
             if choice == 'a':
+                self.view_products()
+                print()
+            elif choice == 'e':
                 print("******YOU ARE SUCCESSFULLY LOGGED OUT******")
                 break
             else:
                 print("Invalid choice. Please enter a valid option.")
+
+    def view_products(self):
+        print("Products:")
+        for product_id, product_info in self.products.items():
+            print(f"ID:{product_id} Name:{product_info['name']} - Price: ${int(product_info['price'])} - Color: {product_info['color']}")
+
+
+
+
+
 
     # ---------------------------------------User Start----------------------------------------------------
     def user_panel(self):
