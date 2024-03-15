@@ -153,8 +153,8 @@ class MobileStoreManagement:
             order_id = input("Enter the order ID to update: ")
             if order_id.isdigit() and int(order_id) in self.user_orders:
                 product_id = int(order_id)
-                new_quantity = int(input("Enter the new quantity: "))
-                if new_quantity > 0:
+                new_quantity = input("Enter the new quantity: ")
+                if new_quantity.isdigit() and new_quantity > 0:
                     self.user_orders[product_id] = new_quantity
                     print("Order updated successfully.")
                 else:
