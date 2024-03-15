@@ -46,7 +46,8 @@ class MobileStoreManagement:
             print("a. Place Order")
             print("b. My Orders")
             print("c. View Order Details")
-            print("d. Logout")
+            print("d. Cancel Order")
+            print("f. Logout")
             print()
             choice = input("Enter your choice: ")
 
@@ -57,6 +58,8 @@ class MobileStoreManagement:
             elif choice == 'c':
                 self.view_order_details()
             elif choice == 'd':
+                self.cancel_order()
+            elif choice == 'f':
                 print()
                 print("****YOU ARE SUCCESSFULLY LOGGED OUT****")
                 return
@@ -120,6 +123,23 @@ class MobileStoreManagement:
         else:
             print("You have no orders yet.")
 
+    def cancel_order(self):
+        if self.user_orders:
+            print("Available Orders:")
+            for product_id in self.user_orders:
+                product_name = self.products[product_id]['name']
+                print(f"{product_id}. {product_name}")
+
+            print()
+            order_id = input("Enter the order ID to cancel: ")
+            if order_id.isdigit() and int(order_id) in self.user_orders:
+                product_id = int(order_id)
+                del self.user_orders[product_id]
+                print("Order canceled successfully.")
+            else:
+                print("Invalid order ID.")
+        else:
+            print("You have no orders yet.")
 
 
 # -----------------------------------------User End--------------------------------------------------
