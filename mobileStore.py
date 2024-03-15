@@ -47,6 +47,7 @@ class MobileStoreManagement:
             print("b. My Orders")
             print("c. View Order Details")
             print("d. Cancel Order")
+            print("e. Update Order")
             print("f. Logout")
             print()
             choice = input("Enter your choice: ")
@@ -59,6 +60,8 @@ class MobileStoreManagement:
                 self.view_order_details()
             elif choice == 'd':
                 self.cancel_order()
+            elif choice == 'e':
+                self.update_order()
             elif choice == 'f':
                 print()
                 print("****YOU ARE SUCCESSFULLY LOGGED OUT****")
@@ -123,7 +126,7 @@ class MobileStoreManagement:
         else:
             print("You have no orders yet.")
 
-    def cancel_order(self):
+    def cancel_order(self):   #------------------user cancle placed order
         if self.user_orders:
             print("Available Orders:")
             for product_id in self.user_orders:
@@ -136,6 +139,22 @@ class MobileStoreManagement:
                 product_id = int(order_id)
                 del self.user_orders[product_id]
                 print("Order canceled successfully.")
+            else:
+                print("Invalid order ID.")
+        else:
+            print("You have no orders yet.")
+
+    def update_order(self):  #-----------------------------------user update order quantity
+        if self.user_orders:
+            order_id = input("Enter the order ID to update: ")
+            if order_id.isdigit() and int(order_id) in self.user_orders:
+                product_id = int(order_id)
+                new_quantity = int(input("Enter the new quantity: "))
+                if new_quantity > 0:
+                    self.user_orders[product_id] = new_quantity
+                    print("Order updated successfully.")
+                else:
+                    print("Invalid quantity.")
             else:
                 print("Invalid order ID.")
         else:
