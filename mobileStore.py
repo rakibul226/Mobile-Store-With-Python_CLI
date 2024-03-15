@@ -44,13 +44,16 @@ class MobileStoreManagement:
 
             print("\nUser Panel:")
             print("a. Place Order")
-            print("b. Logout")
+            print("b. My Orders")
+            print("c. Logout")
             print()
             choice = input("Enter your choice: ")
 
             if choice == 'a':
                 self.place_order()
             elif choice == 'b':
+                self.my_orders()
+            elif choice == 'c':
                 print()
                 print("****YOU ARE SUCCESSFULLY LOGGED OUT****")
                 return
@@ -58,7 +61,7 @@ class MobileStoreManagement:
                 print("Invalid choice. Please enter a valid option.")
 
 
-    def place_order(self):
+    def place_order(self):      #-------------------------user place order
         print("Available Products:")
         for product_id, product_info in self.products.items():
             print(f"{product_id}. {product_info['name']} - Price: ${int(product_info['price'])} - Color: {product_info['color']}")
@@ -81,6 +84,15 @@ class MobileStoreManagement:
             else:
                 print("Invalid product ID")
         else: print("Invalid input. Please enter a numeric product ID.")
+
+    def my_orders(self):   #-------------------------user view placed order
+        if self.user_orders:
+            print("My Orders:")
+            for product_id, quantity in self.user_orders.items():
+                product_name = self.products[product_id]['name']
+                print(f"Product ID: {product_id}. {product_name} ({quantity})")
+        else:
+            print("You have no orders yet.")
 
 # -----------------------------------------User End--------------------------------------------------
 
