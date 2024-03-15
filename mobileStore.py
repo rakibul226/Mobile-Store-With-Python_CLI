@@ -8,7 +8,7 @@ class MobileStoreManagement:
             1: {"name": "Apple", "price": 10, "color": "Red"},
             2: {"name": "Xiaomi", "price": 30, "color": "Green"},
             3: {"name": "Samsung", "price": 20, "color": "Blue"},
-            # Add more products as needed
+
         }
         self.user_orders = {}
 
@@ -69,6 +69,11 @@ class MobileStoreManagement:
             else:
                 print("Invalid choice. Please enter a valid option.")
 
+    def print_available_orders(self):
+        print("Available Orders:")
+        for product_id in self.user_orders:
+            product_name = self.products[product_id]['name']
+            print(f"{product_id}. {product_name}")
 
     def place_order(self):      #-------------------------user place order
         print("Available Products:")
@@ -109,10 +114,8 @@ class MobileStoreManagement:
 
     def view_order_details(self): #--------------------user view order details
         if self.user_orders:
-            print("Available Orders:")
-            for product_id in self.user_orders:
-                product_name = self.products[product_id]['name']
-                print(f"{product_id}. {product_name}")
+
+            self.print_available_orders()
 
             print()
             order_id = input("Enter the order ID to view details: ")
@@ -130,10 +133,7 @@ class MobileStoreManagement:
 
     def cancel_order(self):   #------------------user cancle placed order
         if self.user_orders:
-            print("Available Orders:")
-            for product_id in self.user_orders:
-                product_name = self.products[product_id]['name']
-                print(f"{product_id}. {product_name}")
+            self.print_available_orders()
 
             print()
             order_id = input("Enter the order ID to cancel: ")
@@ -148,6 +148,8 @@ class MobileStoreManagement:
 
     def update_order(self):  #-----------------------------------user update order quantity
         if self.user_orders:
+            self.print_available_orders()
+
             order_id = input("Enter the order ID to update: ")
             if order_id.isdigit() and int(order_id) in self.user_orders:
                 product_id = int(order_id)
