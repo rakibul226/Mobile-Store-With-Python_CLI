@@ -45,7 +45,8 @@ class MobileStoreManagement:
             print("\nUser Panel:")
             print("a. Place Order")
             print("b. My Orders")
-            print("c. Logout")
+            print("c. View Order Details")
+            print("d. Logout")
             print()
             choice = input("Enter your choice: ")
 
@@ -54,6 +55,8 @@ class MobileStoreManagement:
             elif choice == 'b':
                 self.my_orders()
             elif choice == 'c':
+                self.view_order_details()
+            elif choice == 'd':
                 print()
                 print("****YOU ARE SUCCESSFULLY LOGGED OUT****")
                 return
@@ -71,16 +74,20 @@ class MobileStoreManagement:
         if product_choice.isdigit():
             product_id = int(product_choice) #must change the datatype to int
             if product_id in self.products:
-                quantity = int(input("Enter the Quantity :"))
-                if quantity > 0:
-                    if product_id in self.user_orders:
-                        self.user_orders[product_id] += quantity
-                        print("Quantity Updated")
-                    else:
-                        self.user_orders[product_id] = quantity
-                        print(f"Order placed: {quantity} {self.products[product_id]['name']}")
+                quantity_ = input("Enter the Quantity :")
+                if quantity_.isdigit():
+                     quantity = int(quantity_)
+                     if quantity > 0:
+                            if product_id in self.user_orders:
+                                self.user_orders[product_id] += quantity
+                                print("Quantity Updated")
+                            else:
+                                self.user_orders[product_id] = quantity
+                                print(f"Order placed: {quantity} {self.products[product_id]['name']}")
+                     else:
+                          print("Invalid quantity. Quantity must be greater than 0.")
                 else:
-                    print("Invalid quantity. Quantity must be greater than 0.")
+                    print("Invalid input. Quantity must be a number.")
             else:
                 print("Invalid product ID")
         else: print("Invalid input. Please enter a numeric product ID.")
@@ -90,9 +97,30 @@ class MobileStoreManagement:
             print("My Orders:")
             for product_id, quantity in self.user_orders.items():
                 product_name = self.products[product_id]['name']
-                print(f"Product ID: {product_id}. {product_name} ({quantity})")
+                print(f"{product_id}. {product_name} ({quantity})")
         else:
             print("You have no orders yet.")
+
+    def view_order_details(self): #--------------------user view order details
+        if self.user_orders:
+            print("Available Orders:")
+            for product_id in self.user_orders:
+                product_name = self.products[product_id]['name']
+                print(f"{product_id}. {product_name}")
+
+            print()
+            order_id = input("Enter the order ID to view details: ")
+            if order_id.isdigit() and int(order_id) in self.user_orders:
+                product_id = int(order_id)
+                product_info = self.products[product_id]
+                print(
+                    f"{product_id}. Name:{product_info['name']}  Price:${product_info['price']}  Color:{product_info['color']}")
+            else:
+                print("Invalid order ID.")
+        else:
+            print("You have no orders yet.")
+
+
 
 # -----------------------------------------User End--------------------------------------------------
 
