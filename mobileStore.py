@@ -27,6 +27,7 @@ class MobileStoreManagement:
         while True:
             print("\nAdmin Panel:")
             print("a. View Product")
+            print("b. Add Product")
             print("e. Logout")
             print()
 
@@ -36,17 +37,29 @@ class MobileStoreManagement:
             if choice == 'a':
                 self.view_products()
                 print()
+            elif choice == 'b':
+                self.add_product()
             elif choice == 'e':
                 print("******YOU ARE SUCCESSFULLY LOGGED OUT******")
                 break
             else:
                 print("Invalid choice. Please enter a valid option.")
 
-    def view_products(self):
+    def view_products(self):  #------------------------------admin view all product
         print("Products:")
         for product_id, product_info in self.products.items():
-            print(f"ID:{product_id} Name:{product_info['name']} - Price: ${int(product_info['price'])} - Color: {product_info['color']}")
+            print(f"ID:{product_id} Name:{product_info['name']} - Price:${int(product_info['price'])} - Color:{product_info['color']}")
 
+    def add_product(self):  #------------------------------admin add new product
+        product_name = input("Enter product name: ")
+        product_price = input("Enter product price: ")
+        if product_price.isdigit():
+              product_color = input("Enter product color: ")
+              product_id = max(self.products.keys()) + 1
+              self.products[product_id] = {"name": product_name, "price": product_price, "color": product_color}
+              print("Product added successfully.")
+        else:
+              print("Invalid Price")
 
 
 
