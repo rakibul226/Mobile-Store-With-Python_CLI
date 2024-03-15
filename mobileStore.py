@@ -119,8 +119,10 @@ class MobileStoreManagement:
             if order_id.isdigit() and int(order_id) in self.user_orders:
                 product_id = int(order_id)
                 product_info = self.products[product_id]
+                quantity = self.user_orders[product_id]
+                total_price = quantity * product_info['price']
                 print(
-                    f"{product_id}. Name:{product_info['name']}  Price:${product_info['price']}  Color:{product_info['color']}")
+                    f"{product_id}. Name:{product_info['name']} Quantity:{quantity}  Price:${total_price}  Color:{product_info['color']}")
             else:
                 print("Invalid order ID.")
         else:
