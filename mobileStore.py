@@ -29,7 +29,7 @@ class MobileStoreManagement:
             print("a. View Product")
             print("b. Add Product")
             print("c. Update Product")
-
+            print("d. Delete Product")
             print("e. Logout")
             print()
 
@@ -43,7 +43,8 @@ class MobileStoreManagement:
                 self.add_product()
             elif choice == 'c':
                 self.update_product()
-
+            elif choice == 'd':
+                self.remove_product()
             elif choice == 'e':
                 print("******YOU ARE SUCCESSFULLY LOGGED OUT******")
                 break
@@ -85,8 +86,18 @@ class MobileStoreManagement:
         else:
             print("Invalid product ID.")
 
-
-
+    def remove_product(self):   #----------------------------admin delete a product
+        self.view_products()
+        print()
+        product_id = input("Enter the product ID to remove: ")
+        if product_id.isdigit():
+            product_id = int(product_id)
+            if product_id in self.products:
+                del self.products[product_id]
+                print("Product removed successfully.")
+            else:
+                print("Invalid product ID.")
+        else:print("Invalid product ID.")
     # ---------------------------------------User Start----------------------------------------------------
     def user_panel(self):
         print()
