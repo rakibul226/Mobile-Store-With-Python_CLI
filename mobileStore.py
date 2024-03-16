@@ -30,8 +30,7 @@ class MobileStoreManagement:
             print("b. Add Product")
             print("c. Update Product")
             print("d. Remove Product")
-            print("e. Delete All product")
-            print("f. Logout")
+            print("e. Logout")
             print()
 
             choice = input("Enter your choice: ")
@@ -47,45 +46,57 @@ class MobileStoreManagement:
             elif choice == 'd':
                 self.remove_product()
             elif choice == 'e':
-                self.remove_all_products()
-            elif choice == 'f':
                 print("******YOU ARE SUCCESSFULLY LOGGED OUT******")
                 break
             else:
                 print("Invalid choice. Please enter a valid option.")
 
-    def view_products(self):  #------------------------------admin view all product
+    def view_products(self):
         print("Products:")
-        for product_id, product_info in self.products.items():
-            print(f"ID:{product_id} Name:{product_info['name']} - Price:${int(product_info['price'])} - Color:{product_info['color']}")
-
-    def add_product(self):  #------------------------------admin add new product
-        product_name = input("Enter product name: ")
-        product_price = input("Enter product price: ")
-        if product_price.isdigit():
-              product_color = input("Enter product color: ")
-              product_id = max(self.products.keys()) + 1
-              self.products[product_id] = {"name": product_name, "price": product_price, "color": product_color}
-              print("Product added successfully.")
+        if not self.products:  # Check if there are no products
+            print("No products available.")
         else:
-              print("Invalid Price")
+            for product_id, product_info in self.products.items():
+                print(
+                    f"ID:{product_id} Name:{product_info['name']} - Price:${int(product_info['price'])} - Color:{product_info['color']}")
 
-    def update_product(self):          #--------------------admin update product
+    # def add_product(self):  #------------------------------admin add new product
+    #     product_name = input("Enter product name: ")
+    #     if product_name.isalpha():
+    #         product_price = input("Enter product price: ")
+    #         product_color = input("Enter product color: ")
+    #         if product_price.isdigit() and product_color.isalpha():
+    #               product_id = max(self.products.keys()) + 1
+    #               self.products[product_id] = {"name": product_name, "price": product_price, "color": product_color}
+    #               print("Product added successfully.")
+    #         else:
+    #               print("Invalid Price")
+    #     else:
+    #         print("Invalid product name")
+
+    def add_product(self):  # ------------------------------admin add new product
+
+            product_name = input("Enter product name(must be string): ")
+            product_price = input("Enter product price(must be numeric): ")
+            product_color = input("Enter product color(must be string): ")
+            if product_name.isalpha() and product_price.isdigit() and product_color.isalpha():
+                product_id = max(self.products.keys()) + 1
+                self.products[product_id] = {"name": product_name, "price": product_price, "color": product_color}
+                print("Product added successfully.")
+            else:
+                print("Invalid Product Information")
+
+    def update_product(self):
         self.view_products()
         product_id = int(input("Enter the product ID to update: "))
         if product_id in self.products:
-            product_price = input("Enter new product price (press Enter to skip): ")
-            if product_price.isdigit():
-                if product_price:
-                    self.products[product_id]["price"] = product_price
-                    product_color = input("Enter new product color (press Enter to skip): ")
-                    if product_color.isdigit():
-                        print("Invalid color")
-                    else:
-                        self.products[product_id]["color"] = product_color
-                        print("Product updated successfully.")
-
-            else:print("Invalid price")
+            product_price = input("Enter new product price (Press Enter to skip): ")
+            if product_price:
+                self.products[product_id]["price"] = product_price
+            product_color = input("Enter new product color (Press Enter to skip): ")
+            if product_color:
+                self.products[product_id]["color"] = product_color
+            print("Product updated successfully.")
         else:
             print("Invalid product ID.")
 
@@ -102,13 +113,7 @@ class MobileStoreManagement:
                 print("Invalid product ID.")
         else:print("Invalid product ID.")
 
-    def remove_all_products(self):
-        confirm = input("Are you sure you want to remove all products? (yes/no): ").lower()
-        if confirm == "yes":
-            self.products.clear()
-            print("All products removed successfully.")
-        else:
-            print("Operation cancelled.")
+
 
 
 
@@ -153,9 +158,12 @@ class MobileStoreManagement:
             print(f"{product_id}. {product_name}")
 
     def place_order(self):      #-------------------------user place order
-        print("Available Products:")
-        for product_id, product_info in self.products.items():
-            print(f"{product_id}. {product_info['name']} - Price: ${int(product_info['price'])} - Color: {product_info['color']}")
+        print("Products:")
+        if not self.products:  # Check if there are no products
+            print("No products available.")
+        else:
+            for product_id, product_info in self.products.items():
+                print(f"{product_id}. {product_info['name']} - Price: ${int(product_info['price'])} - Color: {product_info['color']}")
 
         print()
         product_choice = input("Enter the product ID to place an order: ")
