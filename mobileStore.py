@@ -5,9 +5,9 @@ class MobileStoreManagement:
             "user": {"password": "user"}
         }
         self.products = {
-            1: {"name": "Apple", "price": 10, "color": "Red"},
-            2: {"name": "Xiaomi", "price": 30, "color": "Green"},
-            3: {"name": "Samsung", "price": 20, "color": "Blue"},
+            1: {"name": "Apple", "price": 10, "color": "Red", "quantity": 50},
+            2: {"name": "Xiaomi", "price": 30, "color": "Green", "quantity": 100},
+            3: {"name": "Samsung", "price": 20, "color": "Blue", "quantity": 75},
 
         }
         self.user_orders = {}
@@ -58,30 +58,17 @@ class MobileStoreManagement:
         else:
             for product_id, product_info in self.products.items():
                 print(
-                    f"ID:{product_id} Name:{product_info['name']} - Price:${int(product_info['price'])} - Color:{product_info['color']}")
-
-    # def add_product(self):  #------------------------------admin add new product
-    #     product_name = input("Enter product name: ")
-    #     if product_name.isalpha():
-    #         product_price = input("Enter product price: ")
-    #         product_color = input("Enter product color: ")
-    #         if product_price.isdigit() and product_color.isalpha():
-    #               product_id = max(self.products.keys()) + 1
-    #               self.products[product_id] = {"name": product_name, "price": product_price, "color": product_color}
-    #               print("Product added successfully.")
-    #         else:
-    #               print("Invalid Price")
-    #     else:
-    #         print("Invalid product name")
+                    f"ID:{product_id} Name:{product_info['name']} - Price:${int(product_info['price'])} - Color:{product_info['color']} - Quantity:{product_info['quantity']}")
 
     def add_product(self):  # ------------------------------admin add new product
 
             product_name = input("Enter product name(must be string): ")
             product_price = input("Enter product price(must be numeric): ")
             product_color = input("Enter product color(must be string): ")
-            if product_name.isalpha() and product_price.isdigit() and product_color.isalpha():
+            product_quantity = input("Enter product quantity (must be numeric): ")
+            if product_name.isalpha() and product_price.isdigit() and product_color.isalpha() and product_quantity.isdigit():
                 product_id = max(self.products.keys()) + 1
-                self.products[product_id] = {"name": product_name, "price": product_price, "color": product_color}
+                self.products[product_id] = {"name": product_name, "price": product_price, "color": product_color, "quantity": product_quantity}
                 print("Product added successfully.")
             else:
                 print("Invalid Product Information")
@@ -96,10 +83,13 @@ class MobileStoreManagement:
                 product_info = self.products[product_id]
                 new_price = input("Enter new product price: ")
                 new_color = input("Enter new product color: ")
-                if new_price.isdigit() and new_color.isalpha():
+                new_quantity = input("Enter new product quantity: ")
+                if new_price.isdigit() and new_color.isalpha() and new_quantity.isdigit():
                     new_price = int(new_price)
+                    new_quantity = int(new_quantity)
                     product_info["price"] = new_price
                     product_info["color"] = new_color
+                    product_info["quantity"] = new_quantity
                     print("Product updated successfully.")
                 else:
                     print("Invalid update information.")
