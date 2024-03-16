@@ -29,8 +29,9 @@ class MobileStoreManagement:
             print("a. View Product")
             print("b. Add Product")
             print("c. Update Product")
-            print("d. Delete Product")
-            print("e. Logout")
+            print("d. Remove Product")
+            print("e. Delete All product")
+            print("f. Logout")
             print()
 
             choice = input("Enter your choice: ")
@@ -46,6 +47,8 @@ class MobileStoreManagement:
             elif choice == 'd':
                 self.remove_product()
             elif choice == 'e':
+                self.remove_all_products()
+            elif choice == 'f':
                 print("******YOU ARE SUCCESSFULLY LOGGED OUT******")
                 break
             else:
@@ -98,6 +101,18 @@ class MobileStoreManagement:
             else:
                 print("Invalid product ID.")
         else:print("Invalid product ID.")
+
+    def remove_all_products(self):
+        confirm = input("Are you sure you want to remove all products? (yes/no): ").lower()
+        if confirm == "yes":
+            self.products.clear()
+            print("All products removed successfully.")
+        else:
+            print("Operation cancelled.")
+
+
+
+
     # ---------------------------------------User Start----------------------------------------------------
     def user_panel(self):
         print()
