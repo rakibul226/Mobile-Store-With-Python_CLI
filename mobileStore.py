@@ -28,6 +28,8 @@ class MobileStoreManagement:
             print("\nAdmin Panel:")
             print("a. View Product")
             print("b. Add Product")
+            print("c. Update Product")
+
             print("e. Logout")
             print()
 
@@ -39,6 +41,9 @@ class MobileStoreManagement:
                 print()
             elif choice == 'b':
                 self.add_product()
+            elif choice == 'c':
+                self.update_product()
+
             elif choice == 'e':
                 print("******YOU ARE SUCCESSFULLY LOGGED OUT******")
                 break
@@ -61,7 +66,24 @@ class MobileStoreManagement:
         else:
               print("Invalid Price")
 
+    def update_product(self):          #--------------------admin update product
+        self.view_products()
+        product_id = int(input("Enter the product ID to update: "))
+        if product_id in self.products:
+            product_price = input("Enter new product price (press Enter to skip): ")
+            if product_price.isdigit():
+                if product_price:
+                    self.products[product_id]["price"] = product_price
+                    product_color = input("Enter new product color (press Enter to skip): ")
+                    if product_color.isdigit():
+                        print("Invalid color")
+                    else:
+                        self.products[product_id]["color"] = product_color
+                        print("Product updated successfully.")
 
+            else:print("Invalid price")
+        else:
+            print("Invalid product ID.")
 
 
 
