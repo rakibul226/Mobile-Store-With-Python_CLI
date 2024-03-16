@@ -88,15 +88,23 @@ class MobileStoreManagement:
 
     def update_product(self):
         self.view_products()
-        product_id = int(input("Enter the product ID to update: "))
-        if product_id in self.products:
-            product_price = input("Enter new product price (Press Enter to skip): ")
-            if product_price:
-                self.products[product_id]["price"] = product_price
-            product_color = input("Enter new product color (Press Enter to skip): ")
-            if product_color:
-                self.products[product_id]["color"] = product_color
-            print("Product updated successfully.")
+        print()
+        product_id = input("Enter the product ID to update: ")
+        if product_id.isdigit():
+            product_id = int(product_id)
+            if product_id in self.products:
+                product_info = self.products[product_id]
+                new_price = input("Enter new product price: ")
+                new_color = input("Enter new product color: ")
+                if new_price.isdigit() and new_color.isalpha():
+                    new_price = int(new_price)
+                    product_info["price"] = new_price
+                    product_info["color"] = new_color
+                    print("Product updated successfully.")
+                else:
+                    print("Invalid update information.")
+            else:
+                print("Invalid product ID.")
         else:
             print("Invalid product ID.")
 
